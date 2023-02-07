@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Modules\Article\Console\Commands\ParseCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -10,12 +11,12 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command(ParseCommand::class)->withoutOverlapping()->everyMinute();
     }
 
     /**
@@ -25,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
-        $this->load(__DIR__.'/../Modules/Article/Console/Commands');
+        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__ . '/../Modules/Article/Console/Commands');
 
         require base_path('routes/console.php');
     }
