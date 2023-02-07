@@ -1,5 +1,7 @@
 <?php
 
+use App\Modules\Article\Providers\ArticleProvider;
+use App\Modules\System\Providers\SystemProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -41,7 +43,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,6 +196,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        ArticleProvider::class,
+        SystemProvider::class,
 
     ],
 
