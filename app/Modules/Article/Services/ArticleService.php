@@ -5,7 +5,9 @@ namespace App\Modules\Article\Services;
 use App\Modules\Article\Contracts\ArticleRepositoryInterface;
 use App\Modules\Article\Data\ArticleDto;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
 
 class ArticleService
 {
@@ -14,6 +16,22 @@ class ArticleService
         private Filesystem                 $filesystem,
     )
     {
+    }
+
+    /**
+     * @param array<string> $selectFields
+     */
+    public function getArticles(
+        int   $page,
+        array $selectFields = [],
+        #[ArrayShape([
+            'field' => 'string',
+            'direction' => 'string',
+        ])]
+        array $sort = []
+    ): LengthAwarePaginator
+    {
+        return $this->articleRepository->getArticles($selectFields, $sort)->paginate(page: $page);
     }
 
     /**

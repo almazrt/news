@@ -42,4 +42,5 @@ http://static.feed.rbc.ru/rbc/logical/footer/news.rss. Периодичност�
 ## Инструкция по запуску парсера:
 
 php artisan migrate\
-php artisan rbc:parse
+php artisan rbc:parse\
+go to http://localhost/api/articles?page=1&sort[0][field]=published_at&sort[0][direction]=desc
